@@ -1,0 +1,19 @@
+<div ng-include="'components/navbar/navbar.html'"></div>
+<div class="container">
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <div class="row">
+        <div class="col-xs-12 col-md-6">
+          <a class="btn btn-info" ui-sref="chatapp.chats"><span class="glyphicon glyphicon-comment"></span></a>
+          <a class="btn btn-info" ui-sref="chatapp.contacts"><span class="glyphicon glyphicon-user"></span></a>
+          <a class="btn btn-info" ui-sref="chatapp.location"><span class="glyphicon glyphicon-map-marker"></span></a>
+          <a class="btn btn-success" ui-sref="chatapp.contacts"><span class="glyphicon glyphicon-eye-open"></span></a>
+          <a class="btn btn-danger" ui-sref="chatapp.contacts"><span class="glyphicon glyphicon-eye-close"></span></a>
+        </div>
+      </div>
+    </div>
+    <div class="panel-body">
+        <div ui-view=""></div>
+    </div>
+  </div>
+</div>

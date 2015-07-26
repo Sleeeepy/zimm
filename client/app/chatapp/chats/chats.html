@@ -1,0 +1,16 @@
+
+<div ng-repeat="chat in chats" class="row">
+
+    <div class="col-xs-4 col-sm-2 col-md-1 pull-left">
+      <img class="img-responsive img-rounded" ng-src="{{chat.img}}" alt="" />
+    </div>
+    <div class="col-xs-5 col-sm-5 col-md-3 pull-left">
+      <b>{{chat.title}}</b> <br>
+      <p>
+        {{chat.msg.author}}: {{chat.msg.text}}
+      </p>
+    </div>
+    <div class="col-xs-2 col-sm-3 pull-left">
+      <small>{{chat.msg.time | date}}</small>
+    </div>
+</div>

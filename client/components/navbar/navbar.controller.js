@@ -2,10 +2,18 @@
 
 angular.module('zimmApp')
   .controller('NavbarCtrl', function ($scope, $location, Auth) {
-    $scope.menu = [{
-      'title': 'Home',
-      'link': '/'
-    }];
+    $scope.menu = [
+        {
+          'title': 'Home',
+          'link': '/',
+          'state':'main'
+        },
+        {
+          'title': 'ChatApp',
+          'link': '/chatapp',
+          'state':'chatapp'
+        },
+    ];
 
     $scope.isCollapsed = true;
     $scope.isLoggedIn = Auth.isLoggedIn;
