@@ -1,6 +1,6 @@
 
 <div ng-repeat="chat in chats" class="row">
-
+  <a href="#">
     <div class="col-xs-4 col-sm-2 col-md-1 pull-left">
       <img class="img-responsive img-rounded" ng-src="{{chat.img}}" alt="" />
     </div>
@@ -13,4 +13,7 @@
     <div class="col-xs-2 col-sm-3 pull-left">
       <small>{{chat.msg.time | date}}</small>
     </div>
+
+  </a>
+
 </div>
