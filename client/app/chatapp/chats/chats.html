@@ -1,4 +1,39 @@
+<!--
+<div class="panel-body">
+  <a href="#" >
+    <span class="glyphicon glyphicon-plus"></span> Create a new chat
+  </a>
+</div>
+-->
+  <div class="list-group">
 
+      <a  ng-repeat="chat in chats" href="#" class="list-group-item">
+        <ul class="list-inline">
+        <li class="hidden-xs">
+          <span class="glyphicon glyphicon-comment"></span><br>
+
+        </li>
+        <li>
+          <b class="hidden-xs">{{chat.title }}</b>
+          <b class="visible-xs">{{chat.title |limitTo: 17}}{{chat.title.length>20?'...':''}}</b><br>
+              {{chat.msg.author}}: {{chat.msg.text}}
+        </li>
+        <li class="pull-right">
+          <small>{{chat.msg.time | date}}</small><br>
+          <span class="badge">42</span>
+        </li>
+
+      </ul>
+      </a>
+
+
+
+
+  </div>
+
+
+
+<!--
 <div ng-repeat="chat in chats" class="row">
   <a href="#">
     <div class="col-xs-4 col-sm-2 col-md-1 pull-left">
@@ -17,3 +52,4 @@
   </a>
 
 </div>
+-->

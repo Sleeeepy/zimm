@@ -1,13 +1,10 @@
 
-<div ng-repeat="contact in contacts" class="row">
 
-    <div class="col-xs-4 col-sm-2 col-md-1 pull-left">
-      <a class="btn btn-default btn-lg" ui-sref="chatapp.contacts"><span class="glyphicon glyphicon-user"></span></a>
+
+    <div class="list-group">
+      <a  ng-repeat="contact in contacts" ui-sref="chatapp.contacts" class="list-group-item">
+
+          <span class="glyphicon glyphicon-user" aria-hidden="true"></span>
+          {{contact.name}}
+        </a>
     </div>
-    <div class="col-xs-5 col-sm-5 col-md-3 pull-left">
-
-        {{contact.name}}
-
-    </div>
-
-</div>

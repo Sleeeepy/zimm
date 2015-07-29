@@ -5,14 +5,11 @@ angular.module('zimmApp')
     $scope.message = 'Hello';
 
     $scope.contacts = [
-      {
-        name:'Emma Morgan'
-      },
-      {
-        name:'Elmar Zimmermann'
-      },
-      {
-        name:'Brian Trauth'
-      },
+      {name:'Heinz Doof'},
+      {name:'Peer Teer'},
+      {name:'Hans Wurst'},
+      {name:'Bugs Bunny'},
+      {name:'Donald Duck'},
+      {name:'Michey Mouse'},
     ];
   });
