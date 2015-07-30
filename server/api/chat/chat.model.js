@@ -6,7 +6,8 @@ var mongoose = require('mongoose'),
 var ChatSchema = new Schema({
   name: String,
   info: String,
-  active: Boolean
+  active: Boolean,
+  members: [{type: Schema.ObjectId, ref:'User'}]
 });
 
 module.exports = mongoose.model('Chat', ChatSchema);

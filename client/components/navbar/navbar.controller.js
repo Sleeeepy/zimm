@@ -11,7 +11,7 @@ angular.module('zimmApp')
         {
           'title': 'ChatApp',
           'link': '/chatapp',
-          'state':'chatapp'
+          'state':'chatapp.chats'
         },
     ];
 

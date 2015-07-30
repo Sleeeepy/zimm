@@ -7,6 +7,11 @@
 -->
   <div class="list-group">
 
+      <a href="#" class="list-group-item" >
+        <span class="glyphicon glyphicon-plus"></span>
+        <em>Create a new chat</em>
+      </a>
+
       <a  ng-repeat="chat in chats" href="#" class="list-group-item">
         <ul class="list-inline">
         <li class="hidden-xs">
@@ -19,7 +24,7 @@
               {{chat.msg.author}}: {{chat.msg.text}}
         </li>
         <li class="pull-right">
-          <small>{{chat.msg.time | date}}</small><br>
+          <small>{{moment(chat.msg.time).fromNow()}}</small><br>
           <span class="badge">42</span>
         </li>
 

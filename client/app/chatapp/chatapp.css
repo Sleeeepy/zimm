@@ -4,3 +4,8 @@ margin-bottom: 0px;
 li{
   vertical-align: text-top;
 };
+
+.panel .panel-heading{
+  margin-left:100px;
+  padding:100px;
+}

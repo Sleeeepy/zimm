@@ -10,7 +10,7 @@ angular.module('zimmApp')
         msg:{
           author:'Anna',
           text:'blabla',
-          time: new Date()
+          time: new Date()-1000*60*4
         }
     },
     {

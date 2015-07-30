@@ -1,11 +1,11 @@
 'use strict';
 
 angular.module('zimmApp')
-  .factory('contacts', function () {
+  .factory('contacts', function ($resource) {
     // Service logic
     // ...
 
-    var meaningOfLife = 42;
+    var  contacts = $resource('/user/:userId');
 
     // Public API here
     return {
