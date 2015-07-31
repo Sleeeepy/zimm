@@ -7,7 +7,7 @@
 -->
   <div class="list-group">
 
-      <a href="#" class="list-group-item" >
+      <a href="#" class="list-group-item" ng-click="addChat();">
         <span class="glyphicon glyphicon-plus"></span>
         <em>Create a new chat</em>
       </a>
@@ -21,7 +21,7 @@
         <li>
           <b class="hidden-xs">{{chat.title }}</b>
           <b class="visible-xs">{{chat.title |limitTo: 17}}{{chat.title.length>20?'...':''}}</b><br>
-              {{chat.msg.author}}: {{chat.msg.text}}
+              <!--{{chat.msg.author}}: {{chat.msg.text}}-->
         </li>
         <li class="pull-right">
           <small>{{moment(chat.msg.time).fromNow()}}</small><br>

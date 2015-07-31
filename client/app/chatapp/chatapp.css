@@ -9,3 +9,9 @@ li{
   margin-left:100px;
   padding:100px;
 }
+
+.navbar-nav>li {
+        float: none;
+        text-align: center;
+        display: inline-block;
+    }

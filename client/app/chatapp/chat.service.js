@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('zimmApp')
-  .service('chat', function () {
+  .factory('chat', function ($resource) {
     // AngularJS will instantiate a singleton by calling "new" on this function
     var convs = [
       {
@@ -10,7 +10,7 @@ angular.module('zimmApp')
         msg:{
           author:'Anna',
           text:'blabla',
-          time: new Date()-1000*60*4
+          updated: new Date()-1000*60*4
         }
     },
     {
@@ -19,7 +19,7 @@ angular.module('zimmApp')
       msg:{
         author:'Karim',
         text:'blabla',
-        time: new Date()
+        updated: new Date()
       }
   },
   {
@@ -28,14 +28,14 @@ angular.module('zimmApp')
     msg:{
       author:'Emma',
       text:'blabla',
-      time: (new Date(2015,6,6))
+      updated: (new Date(2015,6,6))
     }
-}
-  ];
+  }];
 
-  this.conversations = {
-                  get : function (){
-                        return convs;
-                  }
-  }
+  var  chat = $resource('/api/chats/:chatId',{id: "@_id"});
+  chat.conversations = {get: function(){ return convs;}}
+
+  return chat;
+
+
   });

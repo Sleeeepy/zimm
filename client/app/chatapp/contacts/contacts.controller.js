@@ -1,15 +1,24 @@
 'use strict';
 
 angular.module('zimmApp')
-  .controller('ContactsCtrl', function ($scope) {
-    $scope.message = 'Hello';
+  .controller('ContactsCtrl', function ($scope,contacts) {
+    $scope.contacs = [];
+    contacts.query({},function(value, responseHeaders){
+      $scope.contacts = value;
+      console.log(value);
+    });
 
-    $scope.contacts = [
-      {name:'Heinz Doof'},
-      {name:'Peer Teer'},
-      {name:'Hans Wurst'},
-      {name:'Bugs Bunny'},
-      {name:'Donald Duck'},
-      {name:'Michey Mouse'},
-    ];
+
+    $scope.addContact = function (){
+      $scope.contacts.push({name:'Pinco Pallino'});
+      /*
+      var newContact = new contacts();
+      newContact.name = 'Pinco Pallino';
+
+      newContact.$save(function(obj,response){
+        $scope.contacts.push(obj);
+      });
+      */
+    };
+
   });

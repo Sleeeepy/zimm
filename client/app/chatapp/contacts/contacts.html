@@ -2,6 +2,11 @@
 
 
     <div class="list-group">
+      <a href="#" class="list-group-item" ng-click="addContact()">
+        <span class="glyphicon glyphicon-plus"></span>
+        <em>Add contact</em>
+      </a>
+
       <a  ng-repeat="contact in contacts" ui-sref="chatapp.contacts" class="list-group-item">
 
           <span class="glyphicon glyphicon-user" aria-hidden="true"></span>

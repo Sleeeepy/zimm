@@ -4,10 +4,12 @@ var mongoose = require('mongoose'),
     Schema = mongoose.Schema;
 
 var ChatSchema = new Schema({
-  name: String,
+  title: String,
   info: String,
   active: Boolean,
-  members: [{type: Schema.ObjectId, ref:'User'}]
+  members: [{type: Schema.ObjectId, ref:'User'}],
+  created: { type: Date, default: Date.now },
+  updated:  { type: Date, default: Date.now }
 });
 
 module.exports = mongoose.model('Chat', ChatSchema);
