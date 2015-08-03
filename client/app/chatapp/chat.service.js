@@ -35,6 +35,29 @@ angular.module('zimmApp')
   var  chat = $resource('/api/chats/:chatId',{id: "@_id"});
   chat.conversations = {get: function(){ return convs;}}
 
+/*
+  chat.getLocation = function(){
+    if (!this.userLocation){
+      if (navigator.geolocation) {
+
+
+			// Get the user's current position
+			navigator.geolocation.getCurrentPosition(function(pos){
+        this.userLocation = pos.coords;
+      },
+      function(){
+        console.warn('ERROR(' + err.code + '): ' + err.message);
+      });
+			//console.log(pos.latitude + " " + pos.longitude);
+			} else {
+				alert('Geolocation is not supported in your browser');
+			}
+    }
+    console.log(this.userLocation);
+
+
+  };
+  chat.getLocation();*/
   return chat;
 
 
