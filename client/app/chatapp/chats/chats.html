@@ -24,6 +24,9 @@
               <!--{{chat.msg.author}}: {{chat.msg.text}}-->
         </li>
         <li class="pull-right">
+          <button class="btn btn-sm" ng-click="deleteChat(chat,$index)"><span class="glyphicon glyphicon-remove"></span></button>
+        </li>
+        <li class="pull-right">
           <small>{{moment(chat.msg.time).fromNow()}}</small><br>
           <span class="badge">42</span>
         </li>

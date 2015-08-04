@@ -49,7 +49,7 @@ exports.destroy = function(req, res) {
     if(!chat) { return res.send(404); }
     chat.remove(function(err) {
       if(err) { return handleError(res, err); }
-      return res.send(204);
+      return res.json(204);
     });
   });
 };

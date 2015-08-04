@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('zimmApp')
-  .controller('MapCtrl', function ($scope,chat) {
+  .controller('MapCtrl', function ($scope,Chat) {
     $scope.message = 'Hello';
     var map;
     var marker;
