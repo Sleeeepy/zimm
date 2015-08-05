@@ -1,16 +1,16 @@
 'use strict';
 
 angular.module('zimmApp')
-  .controller('ChatsCtrl', function ($scope,Chat,Auth) {
+  .controller('ChatsCtrl', function ($scope,Chat,Modal) {
 
-    $scope.chats = [];
-    $scope.moment     = moment;
-    $scope.user = Auth.getCurrentUser();
+    $scope.moment  = moment;
+    $scope.chats   = [];
     getChats();
 
-    $scope.addChat    = addChat;
-    $scope.deleteChat = deleteChat;
+    $scope.addChat = addChat;
+    $scope.delChat = delChat;
 
+    $scope.delModal = Modal.confirm.delete(delChat);
 
     function getChats(){
       $scope.chats = Chat.conversations.get();
@@ -26,12 +26,16 @@ angular.module('zimmApp')
       });
     };
 
-    function deleteChat(chat,$index) {
-       Chat.delete({id:chat._id},function(value,respHeader){
-         $scope.chats.splice($index,1);
-       });
-    };
+    function delChat(chat,$index) {
+      console.log(chat,$index);
 
+
+        Chat.delete({id:chat._id},function(value,respHeader){
+          $scope.chats.splice($index,1);
+        });
+
+
+    };
 
 
 

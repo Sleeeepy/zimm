@@ -7,7 +7,7 @@
 -->
   <div class="list-group">
 
-      <a href="#" class="list-group-item" ng-click="addChat();">
+      <a ui-sref="addchat" class="list-group-item" ng-click="addChat();">
         <span class="glyphicon glyphicon-plus"></span>
         <em>Create a new chat</em>
       </a>
@@ -24,7 +24,7 @@
               <!--{{chat.msg.author}}: {{chat.msg.text}}-->
         </li>
         <li class="pull-right">
-          <button class="btn btn-sm" ng-click="deleteChat(chat,$index)"><span class="glyphicon glyphicon-remove"></span></button>
+          <button class="btn btn-sm" ng-click="delModal(chat.title,chat,$index)"><span class="glyphicon glyphicon-remove"></span></button>
         </li>
         <li class="pull-right">
           <small>{{moment(chat.msg.time).fromNow()}}</small><br>
@@ -33,8 +33,6 @@
 
       </ul>
       </a>
-
-
 
 
   </div>
