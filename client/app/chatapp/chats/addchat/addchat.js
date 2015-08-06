@@ -6,6 +6,7 @@ angular.module('zimmApp')
       .state('addchat', {
         url: '/addchat',
         templateUrl: 'app/chatapp/chats/addchat/addchat.html',
-        controller: 'AddchatCtrl'
+        controller: 'AddchatCtrl',
+        params:{id:{}}
       });
   });

@@ -8,5 +8,5 @@ module.exports = {
     uri: 'mongodb://localhost/zimm-dev'
   },
 
-  seedDB: true
+  seedDB: false
 };

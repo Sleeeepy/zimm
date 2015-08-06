@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('zimmApp')
-  .factory('contacts', function ($resource) {
+  .factory('Contacts', function ($resource) {
     // Service logic
     // ...
 

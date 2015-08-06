@@ -1,9 +1,9 @@
 'use strict';
 
 angular.module('zimmApp')
-  .controller('ContactsCtrl', function ($scope,contacts) {
-    $scope.contacs = [];
-    contacts.query({},function(value, responseHeaders){
+  .controller('ContactsCtrl', function ($scope,Contacts) {
+    $scope.contacts = [];
+    Contacts.query({},function(value, responseHeaders){
       $scope.contacts = value;
       console.log(value);
     });

@@ -1,5 +1,53 @@
 <div class="col-md-12">
-This is the addchat view.
-<input type="text" class="form-control" ng-model="test" placeholder="Search for...">
-{{test}}
+
+<br>
+<input type="text" class="form-control" ng-model="chat.title" placeholder="Enter a title...">
+<div class="well">
+
+  <ul class="list-group">
+    <li class="list-group-item" ng-repeat="member in chat.members">
+      <span class="glyphicon glyphicon-user"></span>
+      {{member.name}}
+      <button class="btn pull-right" ng-click="remMember(member,$index)">
+        <span class="glyphicon glyphicon-remove"></span>
+      </button>
+    </li>
+  </ul>
+</div>
+
+<div class="alert alert-warning" ng-show="warning.length>0">
+  <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+  <span class="sr-only">Error:</span>
+  {{warning}}
+</div>
+<button class="btn btn-primary" ng-click="saveChat()">Save</button>
+<a class="btn btn-default" ui-sref="chatapp.chats">Cancel</a>
+
+
+
+<br><br>
+<input type="text" class="form-control" ng-model="filter" placeholder="Search for contacts...">
+<ul class="list-group">
+  <a href="#" class="list-group-item"
+      ng-show="test.length>0 || contacts.length<5"
+      ng-repeat="contact in contacts | filter:filter"
+      ng-click="addMember(contact,$index)"
+      >
+      <span class="glyphicon glyphicon-user" aria-hidden="true"></span>
+      <span>{{contact.name}}</span>
+      <button class="btn pull-right">
+        <span class="glyphicon glyphicon-plus"></span>
+      </button>
+  </a>
+</ul>
+<br>
+
+
+
+<br><br><br>
+<pre>
+  {{chat | json}}
+
+</pre>
+
 </div>
