@@ -4,8 +4,8 @@ angular.module('zimmApp')
   .config(function ($stateProvider) {
     $stateProvider
       .state('viewchat', {
-        url: '/viewchat/:id',
-        templateUrl: 'app/chatapp/viewchat/viewchat.html',
+        url: '/chatapp/chats/view/:id',
+        templateUrl: 'app/chatapp/chats/view/viewchat.html',
         controller: 'ViewchatCtrl',
         params:{id:""}
       });

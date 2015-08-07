@@ -2,7 +2,7 @@
 
 angular.module('zimmApp')
   .controller('MapCtrl', function ($scope,Chat) {
-    $scope.message = 'Hello';
+    //todo collapse: https://angular-ui.github.io/bootstrap/
     var map;
     var marker;
     var loop;

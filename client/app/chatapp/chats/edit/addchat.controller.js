@@ -3,6 +3,9 @@
 angular.module('zimmApp')
   .controller('AddchatCtrl', function ($scope,$state,$stateParams, Modal, Contacts, Chat,$timeout) {
 
+    //todo
+    //add typeahead https://angular-ui.github.io/bootstrap/
+
     if($stateParams.id==='asdf'){console.log($stateParams.id)}
 
     $scope.chat = {

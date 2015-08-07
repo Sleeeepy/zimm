@@ -5,6 +5,7 @@
   </a>
 </div>
 -->
+
   <div class="list-group">
 
       <a ui-sref="addchat" class="list-group-item" >
@@ -12,7 +13,7 @@
         <em>Create a new chat</em>
       </a>
 
-      <a  ng-repeat="chat in chats" ui-sref="viewchat({id:chat._id})" class="list-group-item">
+      <a  ng-repeat="chat in chats" ui-sref="viewchat({id:chat._id})" class="list-group-item clearfix">
         <ul class="list-inline">
         <li class="hidden-xs">
           <span class="glyphicon glyphicon-comment"></span><br>

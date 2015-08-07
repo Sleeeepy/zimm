@@ -5,7 +5,9 @@ var Message = require('./message.model');
 
 // Get list of messages
 exports.index = function(req, res) {
-  Message.find(function (err, messages) {
+  Message.find()
+  .populate('author','name')
+  .exec(function (err, messages) {
     if(err) { return handleError(res, err); }
     return res.json(200, messages);
   });
@@ -49,7 +51,7 @@ exports.destroy = function(req, res) {
     if(!message) { return res.send(404); }
     message.remove(function(err) {
       if(err) { return handleError(res, err); }
-      return res.send(204);
+      return res.json(204);
     });
   });
 };

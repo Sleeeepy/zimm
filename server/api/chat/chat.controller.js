@@ -15,7 +15,9 @@ exports.index = function(req, res) {
 
 // Get a single chat
 exports.show = function(req, res) {
-  Chat.findById(req.params.id, function (err, chat) {
+  Chat.findById(req.params.id)
+    .populate('members','name')
+    .exec(function (err, chat) {
     if(err) { return handleError(res, err); }
     if(!chat) { return res.send(404); }
     return res.json(chat);

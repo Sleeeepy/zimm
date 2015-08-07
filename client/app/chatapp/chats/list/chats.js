@@ -4,8 +4,8 @@ angular.module('zimmApp')
   .config(function ($stateProvider) {
     $stateProvider
       .state('chatapp.chats', {
-        url: '/chatapp/chats',
-        templateUrl: 'app/chatapp/chats/chats.html',
+        url: '/chats',
+        templateUrl: 'app/chatapp/chats/list/chats.html',
         controller: 'ChatsCtrl'
       });
   });

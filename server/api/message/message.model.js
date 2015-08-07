@@ -4,8 +4,10 @@ var mongoose = require('mongoose'),
     Schema = mongoose.Schema;
 
 var MessageSchema = new Schema({
-  name: String,
-  info: String,
+  author: { type: Schema.Types.ObjectId, ref: 'User'},
+  chat: { type: Schema.Types.ObjectId, ref: 'Chat'},
+  created: { type: Date, default: Date.now },
+  text: String,
   active: Boolean
 });
 
