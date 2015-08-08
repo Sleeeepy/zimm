@@ -29,7 +29,7 @@
 <input type="text" class="form-control" ng-model="filter" placeholder="Search for contacts...">
 <ul class="list-group">
   <a href="#" class="list-group-item"
-      ng-show="test.length>0 || contacts.length<5"
+      ng-show="filter.length>0 || contacts.length<10"
       ng-repeat="contact in contacts | filter:filter"
       ng-click="addMember(contact,$index)"
       >
@@ -45,7 +45,8 @@
 
 
 <br><br><br>
-<pre>
+<button class="btn btn-default" ng-click="debug=!debug">Debug on/off</button>
+<pre ng-show="debug">
   {{chat | json}}
 
 </pre>

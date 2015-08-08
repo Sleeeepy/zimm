@@ -38,7 +38,8 @@
 
   </div>
 
-<pre>
+  <button class="btn btn-default" ng-click="debug=!debug">Debug on/off</button>
+  <pre ng-show="debug">
   {{chats | json}}
 </pre>
 <!--

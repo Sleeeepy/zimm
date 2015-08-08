@@ -5,13 +5,13 @@ angular.module('zimmApp')
     $stateProvider
       .state('map', {
         url: '/map',
-        templateUrl: 'app/map/map.html',
+        templateUrl: 'app/chatapp/map/map.html',
         controller: 'MapCtrl'
       });
     $stateProvider
         .state('chatapp.map', {
           url: '/map',
-          templateUrl: 'app/map/map.html',
+          templateUrl: 'app/chatapp/map/map.html',
           controller: 'MapCtrl'
         });
   });
