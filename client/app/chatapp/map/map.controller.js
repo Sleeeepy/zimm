@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('zimmApp')
-  .controller('MapCtrl', function ($scope,Chat) {
+  .controller('MapCtrl', function ($scope,Chat,Location) {
     //todo collapse: https://angular-ui.github.io/bootstrap/
     var map;
     var marker;

@@ -1,16 +1,34 @@
 'use strict';
 
 angular.module('zimmApp')
-  .factory('location', function () {
+  .factory('Location', function ($interval) {
     // Service logic
-    // ...
+    var userLocation;
+    function updateLocation() {
+      navigator.geolocation.getCurrentPosition(function(pos){
+              userLocation = {lat:pos.coords.latitude,
+                            lng:pos.coords.longitude
+                            };
+              console.log(userLocation);
+      });
+    }
 
-    var meaningOfLife = 42;
+    var loop;
 
+    function startUpdate(){
+      loop = $interval(updateLocation,3000);
+      console.log(loop);
+    }
+
+    function stopUpdate(){
+      $interval.cancel(loop);
+    }
+    console.log('asdf');
     // Public API here
+    startUpdate();
     return {
-      someMethod: function () {
-        return meaningOfLife;
-      }
+      startUpdate: startUpdate,
+      stopUpdate:stopUpdate,
+      get: userLocation
     };
   });
