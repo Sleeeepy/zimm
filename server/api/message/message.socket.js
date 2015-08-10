@@ -7,6 +7,7 @@
 var Message = require('./message.model');
 
 exports.register = function(socket) {
+
   Message.schema.post('save', function (doc) {
     onSave(socket, doc);
   });
@@ -16,14 +17,9 @@ exports.register = function(socket) {
 }
 
 function onSave(socket, doc, cb) {
-  Message.findById(doc._id)
-  .populate('author','name')
-  .exec(function (err, doc) {
-    if(err) { return  }
-    socket.to('Chat-'+doc.chat).emit('message:save', doc);
-    //socket.emit('message:save', doc);
-  });
-  //socket.emit('message:save', doc);
+        Message.populate(doc,{path:'author',select:'name'},function(err,message){
+          socket.emit('message:save', message);
+        });
 }
 
 function onRemove(socket, doc, cb) {
