@@ -43,9 +43,8 @@ angular.module('zimmApp')
 // socket messages synching
 
 
-       $http.get('/api/messages').success(function(messages) {
+       $http.get('/api/messages/chat/'+$scope.chat._id).success(function(messages) {
          $scope.messages = messages;
-         console.log(messages);
          socket.syncUpdates('message', $scope.messages);
        });
 

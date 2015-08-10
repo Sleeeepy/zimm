@@ -5,12 +5,23 @@ var Message = require('./message.model');
 
 // Get list of messages
 exports.index = function(req, res) {
+
   Message.find()
   .populate('author','name')
   .exec(function (err, messages) {
     if(err) { return handleError(res, err); }
     return res.json(200, messages);
   });
+};
+
+exports.getChat = function(req,res){
+  Message.find({chat:req.params.id})
+  .populate('author','name')
+  .exec(function (err, messages) {
+    if(err) { return handleError(res, err); }
+    return res.json(200, messages);
+  });
+
 };
 
 // Get a single message

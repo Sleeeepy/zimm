@@ -20,7 +20,8 @@ function onSave(socket, doc, cb) {
   .populate('author','name')
   .exec(function (err, doc) {
     if(err) { return  }
-    socket.emit('message:save', doc);
+    socket.to('Chat-'+doc.chat).emit('message:save', doc);
+    //socket.emit('message:save', doc);
   });
   //socket.emit('message:save', doc);
 }

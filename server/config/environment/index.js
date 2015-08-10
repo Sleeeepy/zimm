@@ -29,7 +29,7 @@ var all = {
 
   // Secret for session, you will want to change this and make it an environment variable
   secrets: {
-    session: 'zimm-secret'
+    session: 'zimm-secretasdjklasdf;oiiawerjk;ohk'
   },
 
   // List of user roles

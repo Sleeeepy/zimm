@@ -27,6 +27,7 @@ angular.module('zimmApp')
         success(function(data) {
           $cookieStore.put('token', data.token);
           currentUser = User.get();
+          $rootScope.$broadcast('authenticated');
           deferred.resolve(data);
           return cb();
         }).
@@ -63,6 +64,7 @@ angular.module('zimmApp')
           function(data) {
             $cookieStore.put('token', data.token);
             currentUser = User.get();
+            $rootScope.$broadcast('authenticated');
             return cb(user);
           },
           function(err) {

@@ -2,17 +2,28 @@
 'use strict';
 
 angular.module('zimmApp')
-  .factory('socket', function(socketFactory) {
+  .factory('socket', function(socketFactory,Auth,$rootScope) {
 
     // socket.io now auto-configures its connection when we ommit a connection url
     var ioSocket = io('', {
       // Send auth token on connection, you will need to DI the Auth service above
-      // 'query': 'token=' + Auth.getToken()
+      'query': 'token=' + Auth.getToken(),
       path: '/socket.io-client'
     });
 
     var socket = socketFactory({
       ioSocket: ioSocket
+    });
+
+    //reset socket with token after login/signup
+    $rootScope.$on('authenticated', function() {
+          console.log('$rootScope authenticated');
+          ioSocket = io('', {
+          // Send auth token on connection, you will need to DI the Auth service above
+              forceNew: true,
+              query: 'token=' + Auth.getToken(),
+              path: '/socket.io-client'
+            });
     });
 
     return {
