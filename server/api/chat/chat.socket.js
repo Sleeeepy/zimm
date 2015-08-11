@@ -14,7 +14,7 @@ exports.register = function(socket) {
     onRemove(socket, doc);
   });
 
-  joinRooms(socket);
+
 }
 
 function onSave(socket, doc, cb) {
@@ -26,7 +26,7 @@ function onRemove(socket, doc, cb) {
 }
 
 
-
+/*
 function joinRooms(socket,cb){
   //find all chats socket.user is member of and join socketio room
   //emit on changes to chat and message model
@@ -38,4 +38,4 @@ function joinRooms(socket,cb){
       socket.join('Chat-'+chats[i]._id);
     }
   });
-}
+}*/

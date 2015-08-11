@@ -3,7 +3,7 @@
 angular.module('zimmApp')
   .controller('ChatsCtrl', function ($scope,Chat,Modal,Auth) {
     //if(!Auth.isLoggedIn()){alert('asdf');}
-
+    $scope.user = Auth.getCurrentUser();
     $scope.moment  = moment;
     $scope.chats   = [];
     getChats();
@@ -14,7 +14,7 @@ angular.module('zimmApp')
 
     function getChats(){
       //$scope.chats = Chat.conversations.get();
-      Chat.query({},function(value,responseHeaders){
+      Chat.query({members:$scope.user._id},function(value,responseHeaders){
         $scope.chats = $scope.chats.concat(value);
       });
     };

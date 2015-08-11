@@ -4,30 +4,20 @@
 angular.module('zimmApp')
   .factory('socket', function(socketFactory,Auth,$rootScope) {
 
-    // socket.io now auto-configures its connection when we ommit a connection url
-    var ioSocket = io('', {
-      // Send auth token on connection, you will need to DI the Auth service above
-      'query': 'token=' + Auth.getToken(),
-      path: '/socket.io-client'
-    });
 
-    var socket = socketFactory({
-      ioSocket: ioSocket
-    });
+    var socket = {
+      socket: {},
 
-    //reset socket with token after login/signup
-    $rootScope.$on('authenticated', function() {
-          console.log('$rootScope authenticated');
-          ioSocket = io('', {
-          // Send auth token on connection, you will need to DI the Auth service above
-              forceNew: true,
-              query: 'token=' + Auth.getToken(),
-              path: '/socket.io-client'
-            });
-    });
 
-    return {
-      socket: socket,
+      connectSocket: function(){
+        this.socket = socketFactory({
+          ioSocket: io('', {
+            // Send auth token on connection, you will need to DI the Auth service above
+            'query': 'token=' + Auth.getToken(),
+            path: '/socket.io-client'
+          })
+        });
+      },
 
       /**
        * Register listeners to sync an array with updates on a model
@@ -40,6 +30,7 @@ angular.module('zimmApp')
        * @param {Function} cb
        */
       syncUpdates: function (modelName, array, cb) {
+        var socket = this.socket;
         cb = cb || angular.noop;
 
         /**
@@ -78,8 +69,17 @@ angular.module('zimmApp')
        * @param modelName
        */
       unsyncUpdates: function (modelName) {
+        var socket = this.socket;
         socket.removeAllListeners(modelName + ':save');
         socket.removeAllListeners(modelName + ':remove');
       }
     };
+
+    socket.connectSocket();
+
+    //reset socket with token after login/signup
+    $rootScope.$on('authenticated',socket.connectSocket);
+
+    return socket;
+
   });

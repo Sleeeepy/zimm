@@ -14,7 +14,7 @@ function onDisconnect(socket) {
 
 // When the user connects.. perform this
 function onConnect(socket) {
-  
+
 
   // When the client emits 'info', this listens and executes
   socket.on('info', function (data) {
@@ -24,7 +24,7 @@ function onConnect(socket) {
   // Insert sockets below
   require('../api/location/location.socket').register(socket);
   require('../api/chat/chat.socket').register(socket);
-  require('../api/message/message.socket').register(socket);
+  //require('../api/message/message.socket').register(socket);
   require('../api/thing/thing.socket').register(socket);
 }
 

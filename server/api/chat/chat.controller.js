@@ -5,7 +5,7 @@ var Chat = require('./chat.model');
 
 // Get list of chats
 exports.index = function(req, res) {
-  Chat.find()
+  Chat.find(req.query)
   .populate('members','name')
   .exec(function (err, chats) {
     if(err) { return handleError(res, err); }

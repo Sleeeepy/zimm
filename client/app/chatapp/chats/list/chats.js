@@ -6,6 +6,7 @@ angular.module('zimmApp')
       .state('chatapp.chats', {
         url: '/chats',
         templateUrl: 'app/chatapp/chats/list/chats.html',
-        controller: 'ChatsCtrl'
+        controller: 'ChatsCtrl',
+        authenticate: true
       });
   });

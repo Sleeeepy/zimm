@@ -6,7 +6,7 @@ var Message = require('./message.model');
 // Get list of messages
 exports.index = function(req, res) {
 
-  Message.find()
+  Message.find(req.query)
   .populate('author','name')
   .exec(function (err, messages) {
     if(err) { return handleError(res, err); }
@@ -19,7 +19,7 @@ exports.getChat = function(req,res){
   .populate('author','name')
   .exec(function (err, messages) {
     if(err) { return handleError(res, err); }
-    return res.json(200, messages);
+    return res.status(200).json(messages);
   });
 
 };

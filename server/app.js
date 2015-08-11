@@ -10,6 +10,7 @@ process.env.NODE_ENV = process.env.NODE_ENV || 'development';
 var express = require('express');
 var mongoose = require('mongoose');
 var config = require('./config/environment');
+var socketIo = require('socket.io');
 
 // Connect to database
 mongoose.connect(config.mongo.uri, config.mongo.options);
@@ -24,11 +25,14 @@ if(config.seedDB) { require('./config/seed'); }
 // Setup server
 var app = express();
 var server = require('http').createServer(app);
-var sockets = require('./sockets')(server,config);
-console.log(sockets);
-require('./config/socketio')(sockets);
+var Io = socketIo(server, {serveClient: config.env !== 'production',path:'/socket.io-client'});
+
+//var sockets = require('./sockets')(server,config);
+
 require('./config/express')(app);
 require('./routes')(app);
+require('./config/socketio')(Io);
+require('./sockets')(Io);
 
 // Start server
 server.listen(config.port, function () { //, config.ip
