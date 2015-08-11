@@ -40,12 +40,13 @@ angular.module('zimmApp')
 
     $scope.$on('$destroy', function () {
       socket.unsyncUpdates('message');
+      socket.socket.emit('chat:leave',$stateParams.id);
     });
 
 
     $scope.chat = Chat.get({id:$stateParams.id});
     $scope.messages = Chat.message.query({chat:$stateParams.id});
-    socket.socket.emit('joinChat',$stateParams.id);
+    socket.socket.emit('chat:join',$stateParams.id);
     socket.syncUpdates('message', $scope.messages);
 
     socket.socket.emit('test');

@@ -3,19 +3,27 @@
  */
 
 'use strict';
-var messageEvents = require('./api/message/message.socket').events;
+var emitters = require('./api/message/message.socket').emitters;
 
 module.exports = function(Io) {
 
   //client API
   Io.on('connection',function(client){
     //change joinChat to subscribe
-    client.on('joinChat',function(id){client.join('chat:'+id);});
-    client.on('leaveChat',function(data){client.leave('chat:'+data);});
-    client.on('test',function(){client.emit('welcome',1,2)});
+    client.on('chat:join',function(id){client.join('chat:'+id);});
+    client.on('chat:leave',function(id){client.leave('chat:'+id);});
   });
 
   //server events
-  messageEvents.postSave(function(room,message){Io.to(room).emit('message:save',message)})
-  messageEvents.postRemove(function(room,message){Io.to(room).emit('message:remove',message)})
+  publish(emitters.postSave,'message:save');
+  publish(emitters.postRemove,'message:remove');
+
+
+function publish(serverEvent, message){
+
+  //when an event triggers it calls cb with data and header {room: String, chat:chat._id}
+  serverEvent(function(data,header){
+    Io.to(header.room).emit(message,data,header);
+  })
+}
 }

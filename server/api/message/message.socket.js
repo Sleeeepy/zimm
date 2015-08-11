@@ -6,24 +6,26 @@
 
 var Message = require('./message.model');
 
-exports.API     = {
-  
-}
+exports.receivers     = {
 
-exports.events = {
+}
+//on event call cb with data and headers {room:roomname,name:value}
+exports.emitters = {
 
   postSave: function(callback){
                 Message.schema.post('save', function (doc) {
                   Message.populate(doc,{path:'author',select:'name'},function(err,message){
-                    var room = 'chat:'+message.chat;
-                    callback(room,message);
+                    var header = {room: 'chat:'+message.chat,
+                                  chat: message.chat
+                                  };
+                    callback(message,header);
                   });
                 });
             },
   postRemove: function(callback){
                 Message.schema.post('remove', function (doc) {
-                  var room = 'chat:'+doc.chat;
-                  callback(room,doc);
+                  var header = {room : 'chat:'+doc.chat}
+                  callback(doc,header);
                 });
             }
 
