@@ -11,4 +11,9 @@ var MessageSchema = new Schema({
   active: Boolean
 });
 
+MessageSchema.virtual('ioroom').get(function(){
+      //socket.io room to which model events are emitted
+      return 'chat:' + this.chat;
+    });
+
 module.exports = mongoose.model('Message', MessageSchema);

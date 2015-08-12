@@ -10,7 +10,7 @@ exports.index = function(req, res) {
   .populate('author','name')
   .exec(function (err, messages) {
     if(err) { return handleError(res, err); }
-    return res.json(200, messages);
+    return res.status(200).json(messages);
   });
 };
 
@@ -37,7 +37,7 @@ exports.show = function(req, res) {
 exports.create = function(req, res) {
   Message.create(req.body, function(err, message) {
     if(err) { return handleError(res, err); }
-    return res.json(201, message);
+    return res.status(201).json(message);
   });
 };
 
@@ -50,7 +50,7 @@ exports.update = function(req, res) {
     var updated = _.merge(message, req.body);
     updated.save(function (err) {
       if (err) { return handleError(res, err); }
-      return res.json(200, message);
+      return res.status(200).json(message);
     });
   });
 };

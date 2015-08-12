@@ -46,8 +46,10 @@ angular.module('zimmApp')
        * @param  {Function}
        */
       logout: function() {
+
         $cookieStore.remove('token');
         currentUser = {};
+        
       },
 
       /**

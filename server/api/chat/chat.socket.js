@@ -1,41 +1,40 @@
 /**
  * Broadcast updates to client when the model changes
  */
-
 'use strict';
 
 var Chat = require('./chat.model');
 
+
 exports.register = function(socket) {
-  Chat.schema.post('save', function (doc) {
-    onSave(socket, doc);
+
+
+  // server events
+
+  Chat.schema.post('save', function(doc) {
+    var header = {
+      room: doc.ioroom,
+    };
+    socket.to(doc.io.room).emit('chat:save', doc, header);
   });
-  Chat.schema.post('remove', function (doc) {
-    onRemove(socket, doc);
+
+  Chat.schema.post('remove', function(doc) {
+    var header = {
+      room: doc.ioroom,
+    };
+    socket.to(doc.io.room).emit('chat:remove', doc, header);
   });
+
+
+  //client API
+
+  //create new chat in DB
+  socket.on('chat:post',function(chat){});
+
+  //update an existing chat in DB
+  socket.on('chat:put',function(chat){});
+
+
 
 
 }
-
-function onSave(socket, doc, cb) {
-  socket.emit('chat:save', doc);
-}
-
-function onRemove(socket, doc, cb) {
-  socket.emit('chat:remove', doc);
-}
-
-
-/*
-function joinRooms(socket,cb){
-  //find all chats socket.user is member of and join socketio room
-  //emit on changes to chat and message model
-  Chat.find({members:socket.user},function (err, chats) {
-
-    if(err) { return err }
-    for (var i=0;i<chats.length;i++){
-      console.log(socket.user.name + ' joining room: ' +'Chat-'+chats[i].id);
-      socket.join('Chat-'+chats[i]._id);
-    }
-  });
-}*/

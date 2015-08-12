@@ -1,6 +1,6 @@
 <div class="col-md-12" style="height:600px;">
 <h4>{{chat.title}} <small ng-repeat="memb in chat.members">{{memb.name+' '}}</small></h5>
-
+<a class="btn btn-default" ui-sref="chatapp.chats">exit</a>
 <div class="list-group" style="height:90%;overflow:scroll;">
 
   <div class="list-group-item clearfix" ng-class="getColour(msg);" ng-repeat="msg in messages">
@@ -20,7 +20,7 @@
 <form ng-submit="sendMsg()">
   <div class="input-group">
     <input type="text" class="form-control" ng-model="myMsg" placeholder="Start typing...">
-    <div class="input-group-addon btn" ng-click="sendMsg()">GO</div>
+    <div class="input-group-addon btn" ng-click="sendMsg2()">GO</div>
   </div>
 </form>
 
@@ -30,7 +30,7 @@
 <pre ng-show="debug">
 
   {{messages | json}}
-
+  {{socketdata | json}}
 </pre>
 
 </div>

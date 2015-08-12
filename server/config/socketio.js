@@ -21,11 +21,9 @@ function onConnect(socket) {
     console.info('[%s] %s', socket.address, JSON.stringify(data, null, 2));
   });
 
-  // Insert sockets below
-  require('../api/location/location.socket').register(socket);
-  require('../api/chat/chat.socket').register(socket);
-  //require('../api/message/message.socket').register(socket);
-  require('../api/thing/thing.socket').register(socket);
+  // insert client API below
+  require('../api/message/message.socket').api(socket);
+
 }
 
 //middleware
@@ -61,8 +59,14 @@ module.exports = function (socketio) {
 
   socketio.use(setUser);
 
-  socketio.on('connection', function (socket) {
+  // Insert sockets below
+  require('../api/location/location.socket').register(socketio);
+  require('../api/chat/chat.socket').register(socketio);
+  require('../api/message/message.socket').register(socketio);
+  require('../api/thing/thing.socket').register(socketio);
 
+  socketio.on('connection', function (socket) {
+      console.log('in rooms', socket.rooms);
       socket.address = socket.handshake.address !== null ?
               socket.handshake.address + ':' + socket.handshake.address.port :
               process.env.DOMAIN;
@@ -72,12 +76,12 @@ module.exports = function (socketio) {
       // Call onDisconnect.
       socket.on('disconnect', function () {
         onDisconnect(socket);
-        console.info('[%s] DISCONNECTED', socket.user.name);
+        console.info('[%s] DISCONNECTED', socket.address);
       });
 
       // Call onConnect.
       onConnect(socket);
-      console.info('[%s] CONNECTED', socket.user.name);
+      console.info('[%s] CONNECTED', socket.address);
 
 
       });
