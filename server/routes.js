@@ -6,12 +6,13 @@
 
 var errors = require('./components/errors');
 var path = require('path');
+var auth = require('./auth/auth.service');
 
 module.exports = function(app) {
 
   // Insert routes below
-  app.use('/api/locations', require('./api/location'));
-  app.use('/api/chats', require('./api/chat').router);
+  app.use('/api/locations',auth.isAuthenticated(), require('./api/location'));
+  app.use('/api/chats',auth.isAuthenticated(), require('./api/chat').router);
   app.use('/api/messages', require('./api/message'));
   app.use('/api/things', require('./api/thing'));
   app.use('/api/users', require('./api/user'));

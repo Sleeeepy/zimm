@@ -4,7 +4,14 @@ angular.module('zimmApp')
   .controller('ViewchatCtrl', function ($scope,$stateParams,Chat,$http,socket,Auth) {
     // http://mistic100.github.io/angular-smilies/#usage
 
+    var chatId = $stateParams.id;
+
     $scope.user = Auth.getCurrentUser();
+    $scope.newMsg = {
+      author: $scope.user,
+      text: '',
+      chat: chatId
+    }
 
     $scope.moment = moment;
     $scope.bgs = ['list-group-item-info',
@@ -17,6 +24,9 @@ angular.module('zimmApp')
     $scope.sendMsg2 = sendMsg2;
     $scope.deleteMsg = delMsg;
 
+    $scope.$watchCollection('messages', function() {
+      //alert('hey, myVar has changed!');
+    });
 
 
     function getColour(msg) {
@@ -28,34 +38,16 @@ angular.module('zimmApp')
     }
 
     function sendMsg() {
-      if ($scope.myMsg === '') {
-        return;
-      }
-      var newMsg = {
-          author: $scope.user,
-          chat: $scope.chat,
-          text: $scope.myMsg
-        }
-      new Chat.message(newMsg)
-        .$save(function(obj) {
-          $scope.myMsg = '';
+      if ($scope.newMsg.text === '') {return;}
+      new Chat.message($scope.newMsg).$save(function(obj) {
+          $scope.newMsg.text = '';
         });
-
-
-
     };
-    function sendMsg2() {
-      if ($scope.myMsg === '') {
-        return;
-      }
-      var newMsg = {
-          author: $scope.user,
-          chat: $scope.chat,
-          text: $scope.myMsg
-        }
 
+    function sendMsg2() {
+      if ($scope.newMsg.text === '') {return;}
       socket.socket.emit('message:post',newMsg);
-      $scope.myMsg = '';
+      $scope.newMsg.text = '';
     };
 
      function delMsg(msg) {
