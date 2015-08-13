@@ -29,7 +29,7 @@ angular.module('zimmApp')
        * @param {Array} array
        * @param {Function} cb
        */
-      syncUpdates: function (modelName, array, cb) {
+      syncUpdates: function (modelName, array,filter, cb) {
         var socket = this.socket;
         cb = cb || angular.noop;
 
@@ -37,6 +37,8 @@ angular.module('zimmApp')
          * Syncs item creation/updates on 'model:save'
          */
         socket.on(modelName + ':save', function (item) {
+          if (filter&&!_.find([item],filter)){console.log('no match',_.find([item],filter),[item],filter);return}
+          if (!filter||_.find([item],filter)){console.log('ismatch',item)}
           var oldItem = _.find(array, {_id: item._id});
           var index = array.indexOf(oldItem);
           var event = 'created';

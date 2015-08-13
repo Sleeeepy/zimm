@@ -59,12 +59,12 @@ angular.module('zimmApp')
       socket.socket.emit('chat:leave',$stateParams.id);
     });
 
-
+    $scope.messages2 = [];
     Chat.get({id:$stateParams.id},function(chat){
       $scope.chat = chat;
       $scope.messages = Chat.message.query({chat:$stateParams.id});
       socket.socket.emit('chat:join',$stateParams.id);
-      socket.syncUpdates('message', $scope.messages);
+      socket.syncUpdates('message', $scope.messages,{chat:$stateParams.id});
     });
 
 
