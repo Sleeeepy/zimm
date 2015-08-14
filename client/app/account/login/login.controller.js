@@ -15,7 +15,7 @@ angular.module('zimmApp')
         })
         .then( function() {
           // Logged in, redirect to home
-          $location.path('/');
+          $location.path('/chatapp/chats');
         })
         .catch( function(err) {
           $scope.errors.other = err.message;

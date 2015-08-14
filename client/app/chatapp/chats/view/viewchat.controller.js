@@ -11,7 +11,7 @@ angular.module('zimmApp')
       author: $scope.user,
       text: '',
       chat: chatId
-    }
+    };
 
     $scope.moment = moment;
     $scope.bgs = ['list-group-item-info',

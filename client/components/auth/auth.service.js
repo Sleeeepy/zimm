@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('zimmApp')
-  .factory('Auth', function Auth($location, $rootScope, $http, User, $cookieStore, $q) {
+  .factory('Auth', function Auth($location, $rootScope, $http, User, $cookieStore, $q,socket) {
     var currentUser = {};
     if($cookieStore.get('token')) {
       currentUser = User.get();
@@ -27,7 +27,7 @@ angular.module('zimmApp')
         success(function(data) {
           $cookieStore.put('token', data.token);
           currentUser = User.get();
-          $rootScope.$broadcast('authenticated');
+          socket.connect(data.token);
           deferred.resolve(data);
           return cb();
         }).
@@ -49,7 +49,8 @@ angular.module('zimmApp')
 
         $cookieStore.remove('token');
         currentUser = {};
-        
+        socket.connect();
+
       },
 
       /**

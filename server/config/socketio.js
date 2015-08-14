@@ -50,7 +50,10 @@ module.exports = function (socketio) {
   // 1. You will need to send the token in `client/components/socket/socket.service.js`
   //
   // 2. Require authentication here:
-
+  socketio.use(function(socket,next){
+    console.log('incoming socket connection, authenticating....');
+    next();
+  });
   socketio.use(socketioJwt.authorize({
                 secret: config.secrets.session,
                 handshake: true
@@ -66,7 +69,7 @@ module.exports = function (socketio) {
   require('../api/thing/thing.socket').register(socketio);
 
   socketio.on('connection', function (socket) {
-      console.log('in rooms', socket.rooms);
+      
       socket.address = socket.handshake.address !== null ?
               socket.handshake.address + ':' + socket.handshake.address.port :
               process.env.DOMAIN;
