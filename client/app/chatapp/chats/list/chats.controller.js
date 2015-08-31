@@ -13,7 +13,7 @@ angular.module('zimmApp')
     $scope.delModal = Modal.confirm.delete(delChat);
 
     function getChats(){
-      //$scope.chats = Chat.conversations.get();
+      //$scope.chats = Chat.chatService.chats;
       Chat.query({members:$scope.user._id},function(value,responseHeaders){
         $scope.chats = $scope.chats.concat(value);
       });

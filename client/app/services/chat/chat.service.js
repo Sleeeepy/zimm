@@ -20,7 +20,11 @@ angular.module('zimmApp')
                     if(this.active){return this;}
                     this.user = Auth.getCurrentUser();
 
-                    this.getChats(function(chats){self.chats=chats;self.getMessages();console.log(self.chats);});
+                    this.getChats(function(){
+                      self.getMessages(function(){
+                        console.log('self.chats',self.chats);
+                      });
+                    });
 
                     this.active = true;
                   },
@@ -30,21 +34,37 @@ angular.module('zimmApp')
 
     socket      : socket,
 
-    getChats    : function(cb){
-                    if(this.chats.length>0){return cb(this.chats);}
-                    this.resource.chats.query({members:this.user._id},function(value){
+    getChatById: function(id){
+                    return _.find(this.chats, {_id: id});
+                  },
 
-                            //this.chats = value;
-                            return cb(value);
+    getChats    : function(cb){
+                    var self = this;
+                    if(self.chats.length>0){return cb(self.chats);}
+                    self.resource.chats.query({members:self.user._id},function(value){
+                            //self.chats = value;
+                            self.chats = self.chats.concat(value);
+                            console.log('inservice',self.chats);
+                            return cb(self.chats);
                           });
                   },
 
     getMessages  : function(cb){
-                      console.log('getting messages',this.chats);
-                      for (var i=0;i<this.chats.length;i++){
-                        this.resource.messages.query({chat:this.chats[i]._id},function(value){
-                          console.log(value,value.length);
+                      var self = this,
+                          count = 0;
+
+                      function asyncMessages(i){
+                        self.resource.messages.query({chat:self.chats[i]._id},function(array){
+                            self.chats[i].messages = array;
+                            self.socket.socket.emit('chat:join',self.chats[i]._id);
+                            self.socket.syncUpdates('message',
+                                                    self.chats[i].messages,
+                                                    {chat:self.chats[i]._id});
+                            count+1<self.chats.length ? count++ : cb()
                         });
+                      }
+                      for (var i=0;i<this.chats.length;i++){
+                        asyncMessages(i);
                       }
                   },
 
@@ -59,8 +79,8 @@ angular.module('zimmApp')
 
   };
   console.log('invoking chatservice');
-  chatService.init();
-
+  chatService.init(); //needs to be promise
+  chat.chatService = chatService;
   return chat;
 
 

@@ -55,17 +55,20 @@ angular.module('zimmApp')
     };
 
     $scope.$on('$destroy', function () {
-      socket.unsyncUpdates('message');
-      socket.socket.emit('chat:leave',$stateParams.id);
+      //socket.unsyncUpdates('message');
+      //socket.socket.emit('chat:leave',$stateParams.id);
     });
 
     $scope.messages2 = [];
-    Chat.get({id:$stateParams.id},function(chat){
+    $scope.chat = Chat.chatService.getChatById(chatId);
+    $scope.messages = $scope.chat.messages;
+    /*Chat.get({id:$stateParams.id},function(chat){
       $scope.chat = chat;
       $scope.messages = Chat.message.query({chat:$stateParams.id});
       socket.socket.emit('chat:join',$stateParams.id);
       socket.syncUpdates('message', $scope.messages,{chat:$stateParams.id});
-    });
+
+    });*/
 
 
     socket.socket.emit('test');
