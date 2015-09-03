@@ -28,7 +28,6 @@ angular.module('zimmApp')
                        navigator.webkitGetUserMedia ||
                        navigator.mozGetUserMedia ||
                        navigator.msGetUserMedia);
-    console.log('navigator.getUserMedia: ',navigator.getUserMedia);
     function gotStream(stream) {
       window.myaudio = stream;
       window.AudioContext = window.AudioContext || window.webkitAudioContext;
@@ -36,13 +35,25 @@ angular.module('zimmApp')
 
       // Create an AudioNode from the stream
       var mediaStreamSource = audioContext.createMediaStreamSource(stream);
-
+      attachMediaStream(video1, stream);
+      attachMediaStream(video2, stream);
+      //$scope.video = stream;
       // Connect it to destination to hear yourself
       // or any other node for processing!
-      mediaStreamSource.connect(audioContext.destination);
+      //mediaStreamSource.connect(audioContext.destination);
     }
-
-    navigator.getUserMedia({
-      audio: true
+    console.log('devices',window.devices = navigator.mediaDevices.enumerateDevices());
+    navigator.agetUserMedia({
+      audio: false, video:true
     }, gotStream,function(){});
+    var video1 = document.getElementById('vid1'),
+        video2 = document.getElementById('vid2');
+    // Attach a media stream to an element.
+    function attachMediaStream(element, stream) {
+    console.log("Attaching media stream");
+    element.mozSrcObject = stream;
+    //element.play();
+  };
+
+
   });
