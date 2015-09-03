@@ -17,16 +17,16 @@ angular.module('zimmApp')
     init        : function(){
                     var self = this;
                     console.log('initilising chatservice');
-                    if(this.active){return this;}
-                    this.user = Auth.getCurrentUser();
+                    //if(this.active){return this;}
+                    self.user = Auth.getCurrentUser();
 
-                    this.getChats(function(){
+                    self.getChats(function(){
                       self.getMessages(function(){
                         console.log('self.chats',self.chats);
                       });
                     });
 
-                    this.active = true;
+                    self.active = true;
                   },
     active      : false,
     user        : {},
@@ -61,6 +61,7 @@ angular.module('zimmApp')
                                                     self.chats[i].messages,
                                                     {chat:self.chats[i]._id});
                             count+1<self.chats.length ? count++ : cb()
+                            //if(++count===self.chats.length){cb()}
                         });
                       }
                       for (var i=0;i<this.chats.length;i++){
